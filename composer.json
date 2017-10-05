@@ -1,0 +1,21 @@
+{
+    "name": "macklus/yii2-holded",
+    "description": "Yii Framework extension for https://www.holded.com",
+    "type": "yii2-extension",
+    "keywords": ["yii2", "extension", "api", "holded"],
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "José Pedro Andrés",
+            "email": "macklus@debianitas.net"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "macklus\\holded\\": ""
+        }
+    }
+}
