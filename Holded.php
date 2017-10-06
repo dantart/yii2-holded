@@ -347,14 +347,19 @@ class Holded extends Object
         curl_setopt_array($adb_handle, $options);
         $result = curl_exec($adb_handle);
 
+        $data = json_decode($result, true);
+
         /*
          * Save to DB
          */
         $db = new HoldedModel();
         $db->data = $result;
-        $db->save();
 
-        return json_decode($result, true);
+        if ($db->save() === true) {
+            $data['holded_id'] = $db->id;
+        }
+
+        return $data;
     }
 
     public function getApiUrl()
