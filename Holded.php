@@ -12,9 +12,11 @@ use macklus\holded\models\Holded as HoldedModel;
 class Holded extends Object
 {
 
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
+
     public $apikey = '';
     public $apiversion = 1;
+    public $curl_debug = false;
 
     #Contacts
 
@@ -343,7 +345,7 @@ class Holded extends Object
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => $params,
             CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_VERBOSE => true
+            CURLOPT_VERBOSE => $this->curl_debug
         );
         curl_setopt_array($adb_handle, $options);
         $result = curl_exec($adb_handle);

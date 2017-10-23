@@ -40,6 +40,7 @@ Add in your web.php config file:
 'holded' => [
     'class' => 'macklus\holded\Holded',
     'apikey' => 'INSERT_HERE_YOUR_API_KEY',
+    'curl_debug' => false,
 ],
 ```
 
