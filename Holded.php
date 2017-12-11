@@ -6,10 +6,10 @@
  */
 namespace macklus\holded;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use macklus\holded\models\Holded as HoldedModel;
 
-class Holded extends Object
+class Holded extends BaseObject
 {
 
     const VERSION = '1.0.1';
