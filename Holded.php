@@ -12,7 +12,7 @@ use macklus\holded\models\Holded as HoldedModel;
 class Holded extends BaseObject
 {
 
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.3';
 
     public $apikey = '';
     public $apiversion = 1;
@@ -87,7 +87,7 @@ class Holded extends BaseObject
 
     public function getinvoices($extra = null)
     {
-        return $this->get('/get/doc/invoice', null);
+        return $this->get('/get/doc/invoice', $extra);
     }
 
     public function findinvoice($extra)
@@ -360,6 +360,8 @@ class Holded extends BaseObject
 
         if ($db->save() === true) {
             $data['holded_id'] = $db->id;
+            if (isSet($db->invoicenum)) $data['invoicenum'] = $db->invoicenum;
+            if (isSet($db->contactid)) $data['contactid'] = $db->contactid;
         }
 
         return $data;
