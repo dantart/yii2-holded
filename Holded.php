@@ -12,7 +12,7 @@ use macklus\holded\models\Holded as HoldedModel;
 class Holded extends BaseObject
 {
 
-    const VERSION = '1.0.3';
+    const VERSION = '1.0.4';
 
     public $apikey = '';
     public $apiversion = 1;
