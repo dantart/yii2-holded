@@ -75,7 +75,7 @@ class Holded extends \yii\db\ActiveRecord
 
     public function beforeValidate()
     {
-        $this->encoded_data = JSON::encode($this->data, true);
+        $this->encoded_data = JSON::encode(mb_convert_encoding($this->data, 'UTF-8', 'UTF-8'), true);
         return parent::beforeValidate();
     }
 
