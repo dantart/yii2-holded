@@ -1,5 +1,4 @@
 <?php
-
 namespace macklus\holded\query;
 
 /**
@@ -9,10 +8,10 @@ namespace macklus\holded\query;
  */
 class HoldedQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
+    /* public function active()
+      {
+      return $this->andWhere('[[status]]=1');
+      } */
 
     /**
      * @inheritdoc

@@ -12,14 +12,15 @@ use macklus\holded\models\Holded as HoldedModel;
 class Holded extends BaseObject
 {
 
-    const VERSION = '1.0.4';
+    const VERSION = '1.0.5';
 
     public $apikey = '';
     public $apiversion = 1;
     public $curl_debug = false;
 
-    #Contacts
-
+    /**
+     * Contacts
+     */
     public function getcontacts()
     {
         return $this->get('/get/contacts', null);
@@ -44,8 +45,10 @@ class Holded extends BaseObject
     {
         return $this->get('/delete/contact/' . $cid, []);
     }
-    #Products
 
+    /**
+     * Products
+     */
     public function getproducts()
     {
         return $this->get('/get/products', null);
@@ -75,8 +78,10 @@ class Holded extends BaseObject
     {
         return $this->get('/delete/product/' . $pid, []);
     }
-    #Invoices
 
+    /**
+     * Invoices
+     */
     public function createinvoice($extra)
     {
         if (array_key_exists('items', $extra)) {
@@ -109,8 +114,10 @@ class Holded extends BaseObject
     {
         return $this->get('/pay/invoice/' . $docid, $extra);
     }
-    #Salesreceipts
 
+    /**
+     * Salesreceipts
+     */
     public function createsalesreceipt($extra)
     {
         if (array_key_exists('items', $extra)) {
@@ -143,8 +150,10 @@ class Holded extends BaseObject
     {
         return $this->get('/pay/salesreceipt/' . $docid, $extra);
     }
-    #Creditnotes
 
+    /**
+     * Creditnotes
+     */
     public function createcreditnote($extra)
     {
         if (array_key_exists('items', $extra)) {
@@ -172,8 +181,10 @@ class Holded extends BaseObject
     {
         return $this->get('/delete/doc/creditnote/' . $docid, []);
     }
-    #Salesorders
 
+    /**
+     * Salesorders
+     */
     public function createsalesorder($extra)
     {
         if (array_key_exists('items', $extra)) {
@@ -201,8 +212,10 @@ class Holded extends BaseObject
     {
         return $this->get('/delete/doc/salesorder/' . $docid, []);
     }
-    #Salesorders
 
+    /**
+     * Salesorders
+     */
     public function createwaybill($extra)
     {
         if (array_key_exists('items', $extra)) {
@@ -230,20 +243,26 @@ class Holded extends BaseObject
     {
         return $this->get('/delete/doc/waybill/' . $docid, []);
     }
-    #Sending doc
 
+    /**
+     * Sending doc
+     */
     public function senddoc($doctype, $docid, $extra)
     {
         return $this->get('/send/' . $doctype . '/' . $docid, $extra);
     }
-    #Get pdf
 
+    /**
+     * Get pdf
+     */
     public function getpdf($doctype, $docid)
     {
         return $this->get('/get/pdf/' . $doctype, ['id' => $docid]);
     }
-    #Accounting moves
 
+    /**
+     * Accounting moves
+     */
     public function addentry($fields)
     {
         return $this->get('/add/entry', $fields);
@@ -265,8 +284,10 @@ class Holded extends BaseObject
     {
         return $this->get('/delete/entry', ['entryid' => $entryid]);
     }
-    #Numbering series
 
+    /**
+     * Numbering series
+     */
     public function getnumbering($type)
     {
         return $this->get('/get/numbering/' . $type, null);
@@ -286,8 +307,30 @@ class Holded extends BaseObject
     {
         return $this->get('/delete/numbering/' . $type . '/' . $nlid, []);
     }
-    #Sales channels
 
+    public function getexpaccounts()
+    {
+        return $this->get('/get/expaccounts', null);
+    }
+
+    public function createexpaccounts($extra)
+    {
+        return $this->get('/add/expaccount', $extra);
+    }
+
+    public function updateexpaccounts($scid, $extra)
+    {
+        return $this->get('/update/expaccount/' . $scid, $extra);
+    }
+
+    public function deleteexpaccounts($scid)
+    {
+        return $this->get('/delete/expaccount/' . $scid, []);
+    }
+
+    /**
+     * Sales channels
+     */
     public function getsaleschannels()
     {
         return $this->get('/get/saleschannels', null);
@@ -307,8 +350,10 @@ class Holded extends BaseObject
     {
         return $this->get('/delete/saleschannel/' . $scid, []);
     }
-    #Attach file
 
+    /**
+     * Attach file
+     */
     public function attachfiledoc($doctype, $docid, $path, $setmain)
     {
         $file_name_with_full_path = new CURLFile(realpath($path));
@@ -320,14 +365,18 @@ class Holded extends BaseObject
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         return json_decode(curl_exec($ch), true);
     }
-    #CRM
 
+    /**
+     * CRM
+     */
     public function crmaddlead($extra)
     {
         return $this->get('/add/crm/lead', $extra);
     }
-    ####################
 
+    /**
+     * Plugin functions
+     */
     public function get($url, $extra)
     {
         $params = array('key' => $this->apikey);
@@ -360,8 +409,10 @@ class Holded extends BaseObject
 
         if ($db->save() === true) {
             $data['holded_id'] = $db->id;
-            if (isSet($db->invoicenum)) $data['invoicenum'] = $db->invoicenum;
-            if (isSet($db->contactid)) $data['contactid'] = $db->contactid;
+            if (isSet($db->invoicenum))
+                $data['invoicenum'] = $db->invoicenum;
+            if (isSet($db->contactid))
+                $data['contactid'] = $db->contactid;
         }
 
         return $data;
@@ -372,5 +423,3 @@ class Holded extends BaseObject
         return 'https://app.holded.com/api/v' . $this->apiversion;
     }
 }
-
-?>
