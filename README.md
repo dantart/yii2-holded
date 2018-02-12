@@ -19,7 +19,7 @@ php composer.phar require --prefer-dist macklus/yii2-holded "*"
 or add
 
 ```
-"macklus/yii2-holded": "~1.0.4"
+"macklus/yii2-holded": "~1.0"
 ```
 
 to the require section of your `composer.json` file.
