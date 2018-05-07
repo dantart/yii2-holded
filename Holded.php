@@ -405,7 +405,11 @@ class Holded extends BaseObject
          * Save to DB
          */
         $db = new HoldedModel();
-        $db->data = $result;
+        $db->data = [
+                "result" => $result,
+                "post" => $params
+        ];
+
 
         if ($db->save() === true) {
             $data['holded_id'] = $db->id;
